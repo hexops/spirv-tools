@@ -1,0 +1,21 @@
+.{
+    .name = "spirv-tools",
+    .version = "0.1.0",
+    .paths = .{
+        "include",
+        "source",
+        "build.zig",
+        "build.zig.zon",
+        "update.sh",
+        "verify.sh",
+        "LICENSE",
+        "LICENSES",
+        "README.md",
+    },
+    .dependencies = .{
+        .spirv_headers = .{
+            .url = "https://github.com/KhronosGroup/SPIRV-Headers/archive/38f39dae5baaa24431b24ac659054ebe972fa1e6.tar.gz",
+            .hash = "1220913f2ade00ecc620175709a985572e8dc7d7a46cae79d9e1403cdf49746e324f",
+        },
+    },
+}
