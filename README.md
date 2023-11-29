@@ -4,7 +4,10 @@ This is a fork of [SPIRV-Tools](https://github.com/KhronosGroup/SPIRV-Tools/), p
 
 ## Updating
 
-To update this repository, run `./update.sh` followed by `./verify.sh` to verify the repository contents.
+To update this repository:
+
+1. Update `SPIRV_TOOLS_REV` in the `update.sh` script to the latest revision of the upstream.
+2. Run `./update.sh` followed by `./verify.sh` to verify the repository contents.
 
 ## Verifying repository contents
 
