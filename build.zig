@@ -7,7 +7,6 @@ pub fn build(b: *std.Build) void {
 
     const lib = b.addStaticLibrary(.{
         .name = "spirv-opt",
-        .root_source_file = .{ .path = "source/opt/optimizer.cpp" },
         .target = target,
         .optimize = optimize,
     });
@@ -129,6 +128,7 @@ const sources = &[_][]const u8{
     "source/opt/mem_pass.cpp",
     "source/opt/merge_return_pass.cpp",
     "source/opt/module.cpp",
+    "source/opt/optimizer.cpp",
     "source/opt/pass.cpp",
     "source/opt/pass_manager.cpp",
     "source/opt/pch_source_opt.cpp",
