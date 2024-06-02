@@ -12,12 +12,12 @@ pub fn build(b: *std.Build) void {
     });
     lib.linkLibCpp();
     lib.addCSourceFiles(.{ .files = sources });
-    lib.addIncludePath(.{ .path = "." });
-    lib.addIncludePath(.{ .path = "include" });
-    lib.addIncludePath(.{ .path = "include-generated" });
+    lib.addIncludePath(b.path("."));
+    lib.addIncludePath(b.path("include"));
+    lib.addIncludePath(b.path("include-generated"));
     lib.addIncludePath(spirv_headers.path("include"));
     lib.addIncludePath(spirv_headers.path("include/spirv/unified1"));
-    lib.installHeadersDirectory("include/spirv-tools", "spirv-tools");
+    lib.installHeadersDirectory(b.path("include/spirv-tools"), "spirv-tools", .{});
     b.installArtifact(lib);
 }
 
