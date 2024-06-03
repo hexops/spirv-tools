@@ -1,5 +1,7 @@
 const std = @import("std");
 
+const log = std.log.scoped(.spirv_tools);
+
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
@@ -10,6 +12,30 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+
+    const tag = target.result.os.tag;
+
+    if (tag == .windows) {
+        lib.defineCMacro("SPIRV_WINDOWS", "");
+    } else if (tag == .linux) {
+        lib.defineCMacro("SPIRV_LINUX", "");
+    } else if (tag == .macos) {
+        lib.defineCMacro("SPIRV_MAC", "");
+    } else if (tag == .ios) {
+        lib.defineCMacro("SPIRV_IOS", "");
+    } else if (tag == .tvos) {
+        lib.defineCMacro("SPIRV_TVOS", "");
+    } else if (tag == .kfreebsd) {
+        lib.defineCMacro("SPIRV_FREEBSD", "");
+    } else if (tag == .openbsd) {
+        lib.defineCMacro("SPIRV_OPENBSD", "");
+    } else if (tag == .fuchsia) {
+        lib.defineCMacro("SPIRV_FUCHSIA", "");
+    } else {
+        log.err("Incompatible target platform.", .{});
+        std.process.exit(1);
+    }
+
     lib.linkLibCpp();
     lib.addCSourceFiles(.{ .files = sources });
     lib.addIncludePath(b.path("."));
