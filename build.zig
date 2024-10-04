@@ -25,7 +25,7 @@ pub fn build(b: *std.Build) void {
         lib.defineCMacro("SPIRV_IOS", "");
     } else if (tag == .tvos) {
         lib.defineCMacro("SPIRV_TVOS", "");
-    } else if (tag == .kfreebsd) {
+    } else if (tag == .freebsd) {
         lib.defineCMacro("SPIRV_FREEBSD", "");
     } else if (tag == .openbsd) {
         lib.defineCMacro("SPIRV_OPENBSD", "");
