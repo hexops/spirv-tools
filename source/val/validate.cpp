@@ -141,6 +141,13 @@ spv_result_t ValidateEntryPoints(ValidationState_t& _) {
     }
   }
 
+  if (auto error = ValidateFloatControls2(_)) {
+    return error;
+  }
+  if (auto error = ValidateDuplicateExecutionModes(_)) {
+    return error;
+  }
+
   return SPV_SUCCESS;
 }
 
@@ -359,6 +366,7 @@ spv_result_t ValidateBinaryUsingContextAndValidationState(
     if (auto error = RayTracingPass(*vstate, &instruction)) return error;
     if (auto error = RayReorderNVPass(*vstate, &instruction)) return error;
     if (auto error = MeshShadingPass(*vstate, &instruction)) return error;
+    if (auto error = TensorLayoutPass(*vstate, &instruction)) return error;
   }
 
   // Validate the preconditions involving adjacent instructions. e.g.

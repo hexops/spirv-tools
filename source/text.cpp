@@ -201,7 +201,7 @@ spv_result_t spvTextEncodeOperand(const spvtools::AssemblyGrammar& grammar,
   }
 
   // Optional literal operands can fail to parse. In that case use
-  // SPV_FAILED_MATCH to avoid emitting a diagostic.  Use the following
+  // SPV_FAILED_MATCH to avoid emitting a diagnostic.  Use the following
   // for those situations.
   spv_result_t error_code_for_literals =
       spvOperandIsOptional(type) ? SPV_FAILED_MATCH : SPV_ERROR_INVALID_TEXT;
@@ -227,8 +227,7 @@ spv_result_t spvTextEncodeOperand(const spvtools::AssemblyGrammar& grammar,
 
       // Set the extended instruction type.
       // The import set id is the 3rd operand of OpExtInst.
-      if (spv::Op(pInst->opcode) == spv::Op::OpExtInst &&
-          pInst->words.size() == 4) {
+      if (spvIsExtendedInstruction(pInst->opcode) && pInst->words.size() == 4) {
         auto ext_inst_type = context->getExtInstTypeForId(pInst->words[3]);
         if (ext_inst_type == SPV_EXT_INST_TYPE_NONE) {
           return context->diagnostic()
@@ -411,10 +410,13 @@ spv_result_t spvTextEncodeOperand(const spvtools::AssemblyGrammar& grammar,
     case SPV_OPERAND_TYPE_IMAGE:
     case SPV_OPERAND_TYPE_OPTIONAL_IMAGE:
     case SPV_OPERAND_TYPE_OPTIONAL_MEMORY_ACCESS:
+    case SPV_OPERAND_TYPE_OPTIONAL_RAW_ACCESS_CHAIN_OPERANDS:
     case SPV_OPERAND_TYPE_SELECTION_CONTROL:
     case SPV_OPERAND_TYPE_DEBUG_INFO_FLAGS:
     case SPV_OPERAND_TYPE_CLDEBUG100_DEBUG_INFO_FLAGS:
-    case SPV_OPERAND_TYPE_OPTIONAL_COOPERATIVE_MATRIX_OPERANDS: {
+    case SPV_OPERAND_TYPE_OPTIONAL_COOPERATIVE_MATRIX_OPERANDS:
+    case SPV_OPERAND_TYPE_TENSOR_ADDRESSING_OPERANDS:
+    case SPV_OPERAND_TYPE_COOPERATIVE_MATRIX_REDUCE: {
       uint32_t value;
       if (auto error = grammar.parseMaskOperand(type, textValue, &value)) {
         return context->diagnostic(error)
