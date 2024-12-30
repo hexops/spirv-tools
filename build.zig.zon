@@ -15,8 +15,8 @@
     },
     .dependencies = .{
         .spirv_headers = .{
-            .url = "https://github.com/KhronosGroup/SPIRV-Headers/archive/1bfd27101e4578d0284061bdf8f09fb4755c7c2d.tar.gz",
-            .hash = "122082a1487ea8e9185c6bea2850a53f376279d62bb06158cd357dbecb0fd02219ac",
+            .url = "https://github.com/KhronosGroup/SPIRV-Headers/archive/3f17b2af6784bfa2c5aa5dbb8e0e74a607dd8b3b.tar.gz",
+            .hash = "1220b34ef4a6caf142d288bce1a3afeda97f61fe0908836b0c66fefeba2bad8c2c4f",
         },
     },
 }

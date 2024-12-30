@@ -3,7 +3,7 @@ set -euo pipefail
 
 # TODO: ideally verify.sh runs this script with SPIRV_TOOLS_REV pinned,
 # while update.sh updates this hash.
-SPIRV_TOOLS_REV="c7affa1707b9c517ea028bf9070c97e6842a6749"
+SPIRV_TOOLS_REV="1a0658f55aab97e1803ca46896596a04c395d50d"
 
 echo '----------------------------------------------------------------------------------------------------'
 echo 'update.sh: note: merging upstream is not an automatic process, you must update SPIRV_TOOLS_REV in this'
